@@ -1,0 +1,37 @@
+<!--
+
+    Copyright (C) 2011 Everit Kft. (http://www.everit.org)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<html>
+<body>
+  <section role="dialog" id="are-you-sure-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium"
+    aria-hidden="true" data-aui-remove-on-hide="false" data-eht-fragment="'body'">
+    <!-- Dialog header -->
+    <header class="aui-dialog2-header">
+      <!-- The dialog's title -->
+      <h1 class="aui-dialog2-header-main">Confirmation</h1>
+    </header>
+    <!-- Main dialog content -->
+    <div class="aui-dialog2-content">
+      <p>Are you sure?</p>
+      <div style="text-align: center; padding-top: 2em;">
+        <button class="aui-button aui-button-primary" onclick="areYouSureDialog._handleYes(event);">Yes</button>
+        <button class="aui-button aui-button-primary" onclick="areYouSureDialog._handleNo(event);">No</button>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

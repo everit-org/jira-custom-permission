@@ -1,0 +1,84 @@
+<!--
+
+    Copyright (C) 2011 Everit Kft. (http://www.everit.org)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Everit - Special issues</title>
+<meta charset="UTF-8">
+<meta name="decorator" content="atl.admin">
+<script
+  data-eht-text="webResourceManager.requireResource('org.everit.jira.custompermission:common')"
+  data-eht-render="'content'"></script>
+<script data-eht-text="webResourceManager.requireResource('com.atlassian.auiplugin:dialog2')"
+  data-eht-render="'content'"></script>
+<script
+  data-eht-text="webResourceManager.requireResource('org.everit.jira.custompermission:globalpermission')"
+  data-eht-render="'content'"></script>
+<script
+  data-eht-text="webResourceManager.requireResource('org.everit.web.partialresponse.jira:org.everit.web.partialresponse')"
+  data-eht-render="'content'"></script>
+<script
+  data-eht-text="webResourceManager.requireResource('org.everit.jira.custompermission:unknown-error')"
+  data-eht-render="'content'"></script>
+<script
+  data-eht-text="webResourceManager.requireResource('org.everit.jira.custompermission:are-you-sure')"
+  data-eht-render="'content'"></script>
+</head>
+<body>
+  <div id="aui-message-bar"
+    style="position: absolute; z-index: 3005; top: 0; right: 0; max-width: 400px;"></div>
+  <h2>Global Plugin Permissions</h2>
+
+  <table class="aui aui-table-rowhover">
+    <thead>
+      <tr>
+        <th>Permissions</th>
+        <th style="width: 240px;">Users/Groups</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>My Custom Permission</strong>
+          <div class="secondary-text">Description text</div></td>
+        <td><ul>
+            <li><span> jira-remote-system-administrators </span>
+              <ul class="operations-list" style="display: block;">
+                <li><a
+                  href="/secure/admin/user/UserBrowser.jspa?group=jira-remote-system-administrators">View
+                    Users</a></li>
+
+                <li><a id="del_SYSTEM_ADMIN_jira-remote-system-administrators"
+                  href="GlobalPermissions.jspa?atl_token=A1LX-5LF3-RLIZ-CYZ1%7C436b55b7088fe8a541463020aadc71f02990930d%7Clin&amp;action=confirm&amp;globalPermType=SYSTEM_ADMIN&amp;groupName=jira-remote-system-administrators">Delete</a>
+                </li>
+              </ul></li>
+            <li><span> jira-system-administrators </span>
+              <ul class="operations-list" style="display: block;">
+                <li><a
+                  href="/secure/admin/user/UserBrowser.jspa?group=jira-system-administrators">View
+                    Users</a></li>
+
+                <li><a id="del_SYSTEM_ADMIN_jira-system-administrators"
+                  href="GlobalPermissions.jspa?atl_token=A1LX-5LF3-RLIZ-CYZ1%7C436b55b7088fe8a541463020aadc71f02990930d%7Clin&amp;action=confirm&amp;globalPermType=SYSTEM_ADMIN&amp;groupName=jira-system-administrators">Delete</a>
+                </li>
+              </ul></li>
+          </ul></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

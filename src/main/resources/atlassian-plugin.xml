@@ -1,0 +1,58 @@
+<!--
+
+    Copyright (C) 2011 Everit Kft. (http://www.everit.org)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<atlassian-plugin key="${project.artifactId}" name="${project.name}"
+  plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="Everit Kft." url="http://www.everit.biz" />
+  </plugin-info>
+
+  <resource type="i18n" name="i18n" location="META-INF/i18n/everit-custom-permission" />
+
+  <web-section key="everit_permission_management" name="Everit Jira Custom Permissions"
+    location="admin_plugins_menu" weight="110">
+    <label key="admin_plugins_menu.permission_management" />
+  </web-section>
+
+  <web-item key="global_permissions" name="Everit - Global Permissions Menu Item" section="admin_plugins_menu/everit_permission_management"
+    weight="60">
+    <label key="admin_plugins_menu.section_everit_permission_management.global_permissions" />
+    <link>/plugins/servlet/everit/global-permissions</link>
+  </web-item>
+
+  <servlet name="Global Permissions" class="org.everit.jira.custompermission.internal.servlet.GlobalPermissionsServlet"
+    key="everit-global-permissions">
+    <url-pattern>/everit/global-permissions</url-pattern>
+  </servlet>
+
+  <web-resource name="Everit Jira Custom Permission Common" key="common">
+    <resource name="common.js" type="download" location="META-INF/webresource/js/common.js" />
+    <context>org.everit.jira.custompermission</context>
+  </web-resource>
+
+  <web-resource name="Everit Jira Custom Permission AreYouSure" key="are-you-sure">
+    <resource name="are-you-sure.js" type="download" location="META-INF/webresource/js/are-you-sure.js" />
+    <context>org.everit.jira.hr.admin</context>
+  </web-resource>
+
+  <web-resource name="Everit Jira Unknown error after Ajax" key="unknown-error">
+    <resource name="unknown-error.js" type="download" location="META-INF/webresource/js/unknown-error.js" />
+    <context>org.everit.jira.hr.admin</context>
+  </web-resource>
+</atlassian-plugin>
