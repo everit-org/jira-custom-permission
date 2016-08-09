@@ -20,6 +20,4 @@ import java.util.Collection;
 public interface PermissionMetadataProvider {
 
   Collection<PermissionMetadata> getGlobalPermissionMetadataCollection();
-
-  String getPluginLabel();
 }

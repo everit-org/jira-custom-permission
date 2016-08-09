@@ -15,23 +15,28 @@
  */
 package org.everit.jira.custompermission;
 
-public class ImmutablePermissionMetadata implements PermissionMetadata {
+import java.util.Locale;
+import java.util.function.Function;
 
-  private final String description;
+public class FunctionalPermissionMetadata implements PermissionMetadata {
+
+  private final Function<Locale, String> descriptionProvider;
 
   private final String key;
 
-  private final String label;
+  private final Function<Locale, String> labelProvider;
 
-  public ImmutablePermissionMetadata(final String key, final String label, final String description) {
+  public FunctionalPermissionMetadata(final String key,
+      final Function<Locale, String> labelProvider,
+      final Function<Locale, String> descriptionProvider) {
     this.key = key;
-    this.label = label;
-    this.description = description;
+    this.labelProvider = labelProvider;
+    this.descriptionProvider = descriptionProvider;
   }
 
   @Override
-  public String getDescription() {
-    return description;
+  public String getDescription(final Locale locale) {
+    return descriptionProvider.apply(locale);
   }
 
   @Override
@@ -40,7 +45,7 @@ public class ImmutablePermissionMetadata implements PermissionMetadata {
   }
 
   @Override
-  public String getLabel() {
-    return label;
+  public String getLabel(final Locale locale) {
+    return labelProvider.apply(locale);
   }
 }

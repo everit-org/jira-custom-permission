@@ -41,6 +41,11 @@
     <url-pattern>/everit/global-permissions</url-pattern>
   </servlet>
 
+  <web-resource name="Everit Jira Global Permissions" key="global-permissions">
+    <resource name="global-permissions.js" type="download" location="META-INF/webresource/js/global-permissions.js" />
+    <context>org.everit.jira.hr.admin</context>
+  </web-resource>
+
   <web-resource name="Everit Jira Custom Permission Common" key="common">
     <resource name="common.js" type="download" location="META-INF/webresource/js/common.js" />
     <context>org.everit.jira.custompermission</context>

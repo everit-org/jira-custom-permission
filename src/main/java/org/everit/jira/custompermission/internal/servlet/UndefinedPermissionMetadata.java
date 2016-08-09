@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.everit.jira.custompermission;
+package org.everit.jira.custompermission.internal.servlet;
 
-import java.util.Locale;
+import org.everit.jira.custompermission.FunctionalPermissionMetadata;
 
-public interface PermissionMetadata {
+public class UndefinedPermissionMetadata extends FunctionalPermissionMetadata {
 
-  String getDescription(Locale locale);
-
-  String getKey();
-
-  String getLabel(Locale locale);
+  public UndefinedPermissionMetadata(final String key) {
+    super(key, (locale) -> "Undefined Permission (" + key + ")", (
+        locale) -> "The permission is not defined in any plugin."
+            + " The plugin might not have been started or missing.");
+  }
 
 }

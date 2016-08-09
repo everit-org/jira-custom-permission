@@ -38,47 +38,79 @@
 <script
   data-eht-text="webResourceManager.requireResource('org.everit.jira.custompermission:are-you-sure')"
   data-eht-render="'content'"></script>
+<script
+  data-eht-text="webResourceManager.requireResource('org.everit.jira.custompermission:global-permissions')"
+  data-eht-render="'content'"></script>
 </head>
 <body>
+  <div data-eht-utext="areYouSureDialogComponent.render(response.locale)"></div>
   <div id="aui-message-bar"
     style="position: absolute; z-index: 3005; top: 0; right: 0; max-width: 400px;"></div>
-  <h2>Global Plugin Permissions</h2>
+  <div id="global-permission-content" data-eht-fragment="'global-permission-content'">
+    <h2>Global Plugin Permissions</h2>
 
-  <table class="aui aui-table-rowhover">
-    <thead>
-      <tr>
-        <th>Permissions</th>
-        <th style="width: 240px;">Users/Groups</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>My Custom Permission</strong>
-          <div class="secondary-text">Description text</div></td>
-        <td><ul>
-            <li><span> jira-remote-system-administrators </span>
-              <ul class="operations-list" style="display: block;">
-                <li><a
-                  href="/secure/admin/user/UserBrowser.jspa?group=jira-remote-system-administrators">View
-                    Users</a></li>
+    <table class="aui aui-table-rowhover">
+      <thead>
+        <tr>
+          <th>Permissions</th>
+          <th style="width: 240px;">Users/Groups</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-eht-foreach="{'permissionEntry' : permissionEntryMap.entrySet()}"
+          data-eht-code="permissionMetadata = permissionEntry.key; jiraGroups = permissionEntry.value;">
+          <td><strong data-eht-text="permissionMetadata.getLabel(response.locale)">My
+              Custom Permission</strong>
+            <div class="secondary-text"
+              data-eht-text="permissionMetadata.getDescription(response.locale)">Description
+              text</div></td>
+          <td><ul>
+              <li data-eht-foreach="{'jiraGroup' : jiraGroups}"><span
+                data-eht-text="jiraGroup.groupName"> jira-remote-system-administrators </span>
+                <ul class="operations-list" style="display: block;">
+                  <li><a
+                    data-eht-attr-href="request.contextPath + '/secure/admin/user/UserBrowser.jspa?group=' + ((jiraGroup.groupId != null) ? jiraGroup.groupName : '')">View
+                      Users</a></li>
 
-                <li><a id="del_SYSTEM_ADMIN_jira-remote-system-administrators"
-                  href="GlobalPermissions.jspa?atl_token=A1LX-5LF3-RLIZ-CYZ1%7C436b55b7088fe8a541463020aadc71f02990930d%7Clin&amp;action=confirm&amp;globalPermType=SYSTEM_ADMIN&amp;groupName=jira-remote-system-administrators">Delete</a>
-                </li>
-              </ul></li>
-            <li><span> jira-system-administrators </span>
-              <ul class="operations-list" style="display: block;">
-                <li><a
-                  href="/secure/admin/user/UserBrowser.jspa?group=jira-system-administrators">View
-                    Users</a></li>
-
-                <li><a id="del_SYSTEM_ADMIN_jira-system-administrators"
-                  href="GlobalPermissions.jspa?atl_token=A1LX-5LF3-RLIZ-CYZ1%7C436b55b7088fe8a541463020aadc71f02990930d%7Clin&amp;action=confirm&amp;globalPermType=SYSTEM_ADMIN&amp;groupName=jira-system-administrators">Delete</a>
-                </li>
-              </ul></li>
-          </ul></td>
-      </tr>
-    </tbody>
-  </table>
+                  <li><a
+                    data-eht-attr-href="'javascript:areYouSureDialog.show(function() {removeJiraGroupFromGlobalPermission(\'' + permissionMetadata.key + '\', \'' + ((empty(jiraGroup.groupId)) ? jiraGroup.groupName : jiraGroup.groupId) + '\');});'">Delete</a>
+                  </li>
+                </ul></li>
+              <li data-eht-render="jiraGroups.isEmpty()"><span>No groups assigned</span></li>
+            </ul></td>
+        </tr>
+        <tr data-eht-render="permissionEntryMap.isEmpty()">
+          <td colspan="2">No Global Permissions in the system</td>
+        </tr>
+      </tbody>
+    </table>
+    <form class="aui" action="#" method="post" onsubmit="javascript:assignGlobalPermission(event);">
+      <h3>Add permission</h3>
+      <fieldset>
+        <div class="field-group">
+          <label for="permission-select">Permission</label> <select id="permission-select"
+            required="required" name="permission" class="select">
+            <option label="Please select a permission" />
+            <option data-eht-foreach="{'permissionMetadata' : permissionMetadataCollection}"
+              data-eht-attr-label="permissionMetadata.getLabel(response.locale)"
+              data-eht-attr-value="permissionMetadata.key" />
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="group-select">Group</label> <select id="group-select" name="group"
+            class="select">
+            <option label="Anyone" value="anyone" />
+            <option data-eht-foreach="{'jiraGroup' : selectableJiraGroups}"
+              data-eht-attr-label="jiraGroup.groupName" data-eht-attr-value="jiraGroup.groupId" />
+          </select>
+        </div>
+      </fieldset>
+      <div class="buttons-container">
+        <div class="buttons">
+          <input class="button submit" type="submit" value="Add" />
+        </div>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

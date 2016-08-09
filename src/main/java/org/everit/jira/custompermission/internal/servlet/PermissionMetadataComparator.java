@@ -13,16 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.everit.jira.custompermission;
+package org.everit.jira.custompermission.internal.servlet;
 
+import java.util.Comparator;
 import java.util.Locale;
 
-public interface PermissionMetadata {
+import org.everit.jira.custompermission.PermissionMetadata;
 
-  String getDescription(Locale locale);
+public class PermissionMetadataComparator implements Comparator<PermissionMetadata> {
 
-  String getKey();
+  private final Locale locale;
 
-  String getLabel(Locale locale);
+  public PermissionMetadataComparator(final Locale locale) {
+    this.locale = locale;
+  }
+
+  @Override
+  public int compare(final PermissionMetadata o1, final PermissionMetadata o2) {
+    int result = o1.getLabel(locale).compareTo(o2.getLabel(locale));
+    if (result != 0) {
+      return result;
+    }
+
+    return o1.getKey().compareTo(o2.getKey());
+  }
 
 }

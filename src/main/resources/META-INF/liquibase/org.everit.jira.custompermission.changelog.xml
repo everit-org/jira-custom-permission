@@ -32,7 +32,7 @@
         <constraints nullable="false" />
       </column>
       <column name="group_id" type="bigint">
-        <constraints nullable="false" foreignKeyName="fk_everit_jira_glob_perm_gr"
+        <constraints foreignKeyName="fk_everit_jira_glob_perm_gr"
           referencedTableName="cwd_group" referencedColumnNames="id" />
       </column>
     </createTable>

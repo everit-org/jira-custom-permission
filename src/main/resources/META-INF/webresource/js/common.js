@@ -50,6 +50,11 @@ var processRuntimeAlerts = function() {
         body : alertMessage,
         fadeout : true
       });
+    } else if (alertType == 'warning') {
+      AJS.messages.warning({
+        body : alertMessage,
+        fadeout : true
+      });
     }
   });
 }
