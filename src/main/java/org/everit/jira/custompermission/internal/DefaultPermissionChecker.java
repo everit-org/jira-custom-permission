@@ -19,10 +19,12 @@ import org.everit.jira.custompermission.PermissionChecker;
 import org.everit.jira.custompermission.schema.qdsl.QGlobalPermission;
 import org.everit.jira.querydsl.schema.QCwdGroup;
 import org.everit.jira.querydsl.schema.QCwdMembership;
+import org.everit.jira.querydsl.schema.QCwdUser;
 import org.everit.jira.querydsl.support.QuerydslSupport;
 import org.everit.jira.querydsl.support.ri.QuerydslSupportImpl;
 
 import com.atlassian.jira.component.ComponentAccessor;
+import com.atlassian.jira.user.ApplicationUser;
 import com.querydsl.sql.SQLQuery;
 
 public class DefaultPermissionChecker implements PermissionChecker {
@@ -56,24 +58,28 @@ public class DefaultPermissionChecker implements PermissionChecker {
       return true;
     }
 
-    Long loggedInUserId =
-        ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser().getId();
+    ApplicationUser loggedInUser =
+        ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
 
-    if (loggedInUserId == null) {
+    if (loggedInUser == null) {
       return false;
     }
+
+    String username = loggedInUser.getUsername();
 
     return querydslSupport.execute((connection, configuration) -> {
       QGlobalPermission globalPermission = QGlobalPermission.globalPermission;
       QCwdGroup cwdGroup = QCwdGroup.cwdGroup;
       QCwdMembership membership = QCwdMembership.cwdMembership;
+      QCwdUser cwdUser = QCwdUser.cwdUser;
       Long count = new SQLQuery<>(connection, configuration)
           .select(globalPermission.globalPermissionId.count())
           .from(globalPermission)
           .innerJoin(cwdGroup).on(cwdGroup.id.eq(globalPermission.groupId))
           .innerJoin(membership).on(membership.parentId.eq(cwdGroup.id))
+          .innerJoin(cwdUser).on(cwdUser.id.eq(membership.childId))
           .where(globalPermission.permissionKey.eq(permissionKey)
-              .and(membership.childId.eq(loggedInUserId)))
+              .and(cwdUser.userName.eq(username)))
           .fetchOne();
 
       return count > 0;
