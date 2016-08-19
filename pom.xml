@@ -27,7 +27,7 @@
 
   <groupId>org.everit.jira.hr</groupId>
   <artifactId>org.everit.jira.custompermission</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>atlassian-plugin</packaging>
 
   <name>Everit - Jira Custom Permission Support</name>
