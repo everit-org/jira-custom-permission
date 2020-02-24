@@ -319,6 +319,11 @@
         <checksumPolicy>warn</checksumPolicy>
       </releases>
     </repository>
+    <repository>
+      <id>everit.public.releases</id>
+      <name>Everit Public Repository</name>
+      <url>https://repo.everit.biz/artifactory/public-release</url>
+    </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
