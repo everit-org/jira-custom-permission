@@ -351,7 +351,7 @@
       <uniqueVersion>false</uniqueVersion>
       <id>everit.public.releases</id>
       <name>Everit Public</name>
-      <url>https://repository.everit.biz/nexus/content/repositories/releases</url>
+      <url>https://repository.everit.biz/nexus/content/repositories/public-releases</url>
       <layout>default</layout>
     </repository>
   </distributionManagement>
