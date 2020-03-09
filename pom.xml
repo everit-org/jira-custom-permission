@@ -27,7 +27,7 @@
 
   <groupId>org.everit.jira.hr</groupId>
   <artifactId>org.everit.jira.custompermission</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <packaging>atlassian-plugin</packaging>
 
   <name>Everit - Jira Custom Permission Support</name>
@@ -287,7 +287,7 @@
     <dependency>
       <groupId>org.everit.jira</groupId>
       <artifactId>jira-querydsl-support</artifactId>
-      <version>1.0.0</version>
+      <version>2.0.2</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -322,7 +322,7 @@
     <repository>
       <id>everit.public.releases</id>
       <name>Everit Public Repository</name>
-      <url>https://repo.everit.biz/artifactory/public-release</url>
+      <url>https://repository.everit.biz/nexus/content/groups/public/</url>
     </repository>
   </repositories>
   <pluginRepositories>
@@ -339,5 +339,20 @@
         <checksumPolicy>warn</checksumPolicy>
       </releases>
     </pluginRepository>
+    <pluginRepository>
+      <id>everit.public.releases</id>
+      <name>Everit Public Repository</name>
+      <url>https://repository.everit.biz/nexus/content/groups/public/</url>
+    </pluginRepository>
   </pluginRepositories>
+
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>everit.public.releases</id>
+      <name>Everit Public</name>
+      <url>https://repository.everit.biz/nexus/content/repositories/releases</url>
+      <layout>default</layout>
+    </repository>
+  </distributionManagement>
 </project>
